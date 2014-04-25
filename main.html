@@ -1,0 +1,85 @@
+<html>
+<head>
+   <title>MineJS</title>
+   <style>
+   * {
+      box-sizing: border-box;
+   }
+   html, body {
+      font-family: sans-serif;
+   }
+   h1 {
+      font-size: 24pt;
+   }
+   .flagMode label {
+      display: block;
+      height: 50px;
+      line-height: 50px;
+   }
+   td {
+      font-size: 18pt;
+      width: 50px;
+      height: 50px;
+      border: 1px solid #ccc;
+      cursor: default;
+      text-align: center;
+      vertical-align: middle;
+   }
+   td.isFlag {
+      background-color: orange;
+   }
+   td.isQuestion {
+      background-color: lightblue;
+   }
+   td.isClickable {
+      cursor: pointer;
+   }
+   td.isMine {
+      background-color: red;
+   }
+   td.isCovered {
+      background-color: #ccc;
+      cursor: pointer;
+   }
+   .wonMessage {
+      color: green;
+   }
+   .lostMessage {
+      color: red;
+   }
+   </style>
+   <script type="text/html" id="bodyTemplate">
+      <div class="flagMode">
+         <label for="flagMode">
+            <input id="flagMode" type="checkbox" data-bind="checked: flagMode">
+            Flag mode
+         </label>
+      </div>
+      <table>
+         <tbody>
+            <!-- ko foreach: rows -->
+            <tr data-bind="foreach: cols">
+               <td data-bind="text: displayValue, click: leftClick, css: className, event: { contextmenu: rightClick }"></td>
+            </tr>
+            <!-- /ko -->
+         </tbody>
+      </table>
+      <h1 class="wonMessage" style="display: none" data-bind="visible: won">
+         You won!
+      </h1>
+      <h1 class="lostMessage" style="display: none" data-bind="visible: lost">
+         You lost!
+      </h1>
+   </script>
+</head>
+<body>
+   <div id="gameLocation" data-bind="template: 'bodyTemplate'"></div>
+
+   <script type="text/javascript" src="underscore.js"></script>
+   <script type="text/javascript" src="knockout.js"></script>
+   <script type="text/javascript">window.game = {};</script>
+   <script type="text/javascript" src="grid.js"></script>
+   <script type="text/javascript" src="view-model.js"></script>
+   <script type="text/javascript" src="game.js"></script>
+</body>
+</html>
